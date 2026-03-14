@@ -1,11 +1,11 @@
 import aiohttp
 
 from typing import Dict, Union, Optional
-from rolimons.models import item, user
-from rolimons.data_types import item_types, user_types
-from helpers import pass_session
-from rolimons import helpers
-import errors
+from .models import item, user
+from .data_types import item_types, user_types
+from .helpers import pass_session
+from . import helpers
+from . import errors
 
 @pass_session
 async def generic_item_info(session: Optional[aiohttp.ClientSession] = None) -> Union[Dict[str, item.ItemDetails], errors.Request.Failed]:        

@@ -1,10 +1,22 @@
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple, Any, Literal, cast
-from rolimons.models.item import HistoryData, SaleData, OwnershipData, HoardData, BCCopyData, CopyData, ValueChange
-from rolimons.models.user import PlayerInfo, ScannedPlayerAsset, WishList, NFTList, AskingList, Asking, ChartData
-from rolimons.data_types import item_types, user_types
+from functools import wraps
+import aiohttp
+from .models.item import HistoryData, SaleData, OwnershipData, HoardData, BCCopyData, CopyData, ValueChange
+from .models.user import PlayerInfo, ScannedPlayerAsset, WishList, NFTList, AskingList, Asking, ChartData
+from .data_types import item_types, user_types
 import re
 import json
+
+def pass_session(func):
+    @wraps(func)
+    async def wrapper(*args, **kwargs):
+        if 'session' not in kwargs or kwargs['session'] is None:
+            async with aiohttp.ClientSession() as session:
+                kwargs['session'] = session
+                return await func(*args, **kwargs)
+        return await func(*args, **kwargs)
+    return wrapper
 
 @dataclass
 class JSVariable:

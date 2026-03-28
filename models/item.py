@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from typing import Union, Literal, Optional, List
-from ..data_types import item_types
+from rolimons.data_types import item_types
 
 BASE_GENERIC_ITEM_URL = "https://www.rolimons.com/catalog"
 BASE_GENERIC_ITEM_VAR_NAME = "item_details"
@@ -104,6 +104,7 @@ class ItemDetails:
     bc_copies: int
     hoarded_copies: int
     num_sellers: int
+    hoarded_copies: int
     favorited: int
     demand: Optional[item_types.DemandLevel]
     trend: Optional[item_types.TrendLevel]
@@ -111,7 +112,8 @@ class ItemDetails:
     hyped: Optional[Literal[1]]
     rare: Optional[Literal[1]]
     thumbnail_url_lg: str
-    
+    migrated_to_bundle_id: Optional[int] = None
+
     history_data: Optional[List[HistoryData]] = None
     sales_data: Optional[List[SaleData]] = None
     ownerships_data: Optional[List[OwnershipData]] = None

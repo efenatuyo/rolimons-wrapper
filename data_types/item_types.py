@@ -32,6 +32,7 @@ class ItemDetailsData(TypedDict):
     hyped: Optional[Literal[1]]
     rare: Optional[Literal[1]]
     thumbnail_url_lg: str
+    migrated_to_bundle_id: Optional[int]
 
 
 ItemTuple = Tuple[
